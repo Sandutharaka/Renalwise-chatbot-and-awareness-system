@@ -1,0 +1,46 @@
+<!-- profiles/templates/profiles/register_donor.html -->
+{% extends 'base.html' %}
+
+{% block title %}Donor Registration{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      <h2>Donor Registration</h2>
+    </div>
+    <div class="card-body">
+      <p>
+        {% if donor_profile %}
+          <div class="alert alert-info">
+            You are already registered as a Donor. 
+            <a href="{% url 'profiles:register_needer' %}" class="btn btn-link">Click here to find Needer!</a>
+            Edit your details below or delete.
+            <br>
+            <a href="{% url 'profiles:donor_detail' donor_profile.pk %}" class="btn btn-info mt-2">View Donor Details</a>
+          </div>
+        {% else %}
+          <div class="alert alert-warning">
+            Register as a Donor by filling out this form.
+          </div>
+        {% endif %}
+      </p>
+
+      <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Save</button>
+          {% if donor_profile %}
+            <!-- Show delete button only if there's an existing donor profile -->
+            <button type="submit" name="delete" class="btn btn-danger">
+              Delete Donor Registration
+            </button>
+          {% endif %}
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

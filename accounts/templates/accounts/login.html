@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - Renalwise</title>
+    {% load static %}
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+        }
+        .image-container {
+            margin-right: 30px;
+        }
+        .form-container {
+            max-width: 450px; /* Increased from 350px to 450px */
+            margin-right: 30px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        form p {
+            margin-bottom: 15px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #870F10;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #6b0c0d;
+        }
+        .nav-link {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-container">
+            <img src="{% static 'images/logimg.png' %}" alt="Login Image" width="600">
+        </div>
+        <div class="form-container">
+            <h1>Login</h1>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Login</button>
+            </form>
+            <a class="nav-link" href="{% url 'accounts:register' %}">Don’t have an account? Register</a>
+        </div>
+    </div>
+</body>
+</html>

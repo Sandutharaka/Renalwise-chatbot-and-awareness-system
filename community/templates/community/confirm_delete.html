@@ -1,0 +1,20 @@
+<!-- community/templates/community/confirm_delete.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Confirm Delete{% endblock %}
+
+{% block content %}
+<h2>Confirm Delete</h2>
+{% if type == 'post' %}
+    <h4>{{ object.title }}</h4>
+{% elif type == 'comment' %}
+    <p>{{ object.content }}</p>
+{% endif %}
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Yes, delete</button>
+    <a href="{% if type == 'post' %}{% url 'community:community' %}{% elif type == 'comment' %}{% url 'community:post_detail' object.post.pk %}{% endif %}" class="btn btn-secondary">Cancel</a> <!-- Corrected Line -->
+</form>
+{% endblock %}

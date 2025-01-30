@@ -1,0 +1,20 @@
+<!-- profiles/templates/profiles/confirm_delete.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Confirm Delete{% endblock %}
+
+{% block content %}
+<h2>Confirm Delete</h2>
+{% if type == 'donor' %}
+    <p>Are you sure you want to delete your Donor registration?</p>
+{% elif type == 'needer' %}
+    <p>Are you sure you want to delete your Needer registration?</p>
+{% endif %}
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Yes, delete</button>
+    <a href="{% if type == 'donor' %}{% url 'donor_detail' object.pk %}{% elif type == 'needer' %}{% url 'needer_detail' object.pk %}{% endif %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

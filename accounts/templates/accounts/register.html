@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register - Renalwise</title>
+    {% load static %}
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+        }
+        .image-container {
+            margin-right: 30px;
+        }
+        .form-container {
+            max-width: 600px; /* Increased from 450px to 600px */
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        form p {
+            margin-bottom: 15px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #870F10;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #6b0c0d;
+        }
+        .nav-link {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .form-row > div {
+            flex: 1 1 45%;
+            margin-bottom: 15px;
+        }
+        .half-width {
+            flex: 1 1 25%;
+            margin-bottom: 15px;
+        }
+        .full-width {
+            flex: 1 1 100%;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-container">
+            <img src="{% static 'images/logimg.png' %}" alt="Register Image" width="600">
+        </div>
+        <div class="form-container">
+            <h1>Register</h1>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="half-width">
+                        <label for="id_first_name">First name:</label>
+                        {{ form.first_name }}
+                    </div>
+                    <div class="half-width">
+                        <label for="id_last_name">Last name:</label>
+                        {{ form.last_name }}
+                    </div>
+                </div>
+                <div class="full-width">
+                    <label for="id_username">Username:</label>
+                    {{ form.username }}
+                </div>
+                <div class="full-width">
+                    <label for="id_email">Email:</label>
+                    {{ form.email }}
+                </div>
+                <div class="form-row">
+                    <div class="half-width">
+                        <label for="id_dob">Date of Birth:</label>
+                        {{ form.dob }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="half-width">
+                        <label for="id_gender">Gender:</label>
+                        {{ form.gender }}
+                    </div>
+                </div>
+                <div class="full-width">
+                    <label for="id_password1">Password:</label>
+                    {{ form.password1 }}
+                </div>
+                <div class="full-width">
+                    <label for="id_password2">Confirm Password:</label>
+                    {{ form.password2 }}
+                </div>
+                <button type="submit">Register</button>
+            </form>
+            <a class="nav-link" href="{% url 'accounts:login' %}">Already have an account? Login</a>
+        </div>
+    </div>
+</body>
+</html>

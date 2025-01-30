@@ -1,0 +1,26 @@
+<!-- profiles/templates/profiles/matching_needeers.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Matching Needeers{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2>Matching Needeers</h2>
+  <hr>
+  {% if needers %}
+    <ul class="list-group">
+      {% for needer in needers %}
+        <li class="list-group-item">
+          <h5>{{ needer.user.first_name }} {{ needer.user.last_name }}</h5>
+          <p><strong>Blood Type:</strong> {{ needer.blood_type }}</p>
+          <p><strong>Address:</strong> {{ needer.address }}</p>
+          <a href="{% url 'profiles:needer_detail' needer.pk %}" class="btn btn-info">View Details</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No matching needers found.</p>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+<!-- profiles/templates/profiles/matched_needeers.html -->
+{% extends 'base.html' %}
+
+{% block title %}Matching Needeers{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      <h2>Needeers Matching Your Blood Type ({{ blood_type }})</h2>
+    </div>
+    <div class="card-body">
+      {% if matching_needeers %}
+        {% for needer in matching_needeers %}
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title">{{ needer.user.first_name }} {{ needer.user.last_name }}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Username: {{ needer.user.username }}</h6>
+              <p class="card-text"><strong>Email:</strong> {{ needer.user.email }}</p>
+              <p class="card-text"><strong>Phone Number:</strong> {{ needer.phone_number }}</p>
+              <p class="card-text"><strong>Address:</strong> {{ needer.address }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="alert alert-warning">
+          No matching needeers found.
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

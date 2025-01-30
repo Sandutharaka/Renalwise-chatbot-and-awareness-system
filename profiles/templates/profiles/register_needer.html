@@ -1,0 +1,46 @@
+<!-- profiles/templates/profiles/register_needer.html -->
+{% extends 'base.html' %}
+
+{% block title %}Needer Registration{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      <h2>Needer Registration</h2>
+    </div>
+    <div class="card-body">
+      <p>
+        {% if needer_profile %}
+          <div class="alert alert-info">
+            You are already registered as a Needer. 
+            <a href="{% url 'profiles:register_donor' %}" class="btn btn-link">Click here to find Donor!</a>
+            Edit your details below or delete.
+            <br>
+            <a href="{% url 'profiles:needer_detail' needer_profile.pk %}" class="btn btn-info mt-2">View Needer Details</a>
+          </div>
+        {% else %}
+          <div class="alert alert-warning">
+            Register as a Needer by filling out this form.
+          </div>
+        {% endif %}
+      </p>
+
+      <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Save</button>
+          {% if needer_profile %}
+            <!-- Show delete button only if there's an existing needer profile -->
+            <button type="submit" name="delete" class="btn btn-danger">
+              Delete Needer Registration
+            </button>
+          {% endif %}
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

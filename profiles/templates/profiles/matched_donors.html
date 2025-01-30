@@ -1,0 +1,33 @@
+<!-- profiles/templates/profiles/matched_donors.html -->
+{% extends 'base.html' %}
+
+{% block title %}Matching Donors{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      <h2>Donors Matching Your Blood Type ({{ blood_type }})</h2>
+    </div>
+    <div class="card-body">
+      {% if matching_donors %}
+        {% for donor in matching_donors %}
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title">{{ donor.user.first_name }} {{ donor.user.last_name }}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Username: {{ donor.user.username }}</h6>
+              <p class="card-text"><strong>Email:</strong> {{ donor.user.email }}</p>
+              <p class="card-text"><strong>Phone Number:</strong> {{ donor.phone_number }}</p>
+              <p class="card-text"><strong>Address:</strong> {{ donor.address }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="alert alert-warning">
+          No matching donors found.
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
